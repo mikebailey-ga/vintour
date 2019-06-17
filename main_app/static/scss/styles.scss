@@ -1,0 +1,8 @@
+// Styles.scss
+@import "layout.scss";
+@import "home.scss"; 
+
+@media (min-width: 1024px){
+    @import "1024/layout.scss"; 
+    @import "1024/home.scss"; 
+}

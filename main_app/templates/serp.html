@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>SERP</h1>
+
+
+<ul>
+{% for place in query_result %}
+<li>
+{{ place.name }}
+</li>
+
+{% endfor %}
+</ul>
+
+{% endblock %}  

@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+}
+header{
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+}
+.header-left{
+    width: 50%;
+    float: left;
+}
+.header-right{
+    width: 50%;
+    float: right;
+}
+.header-center{
+    display: none;
+    text-align: center;
+}
+
+.logo{
+    font-size: 20px;
+    display: inline-block;
+    color: white;
+}
+.mobile-nav-trigger{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    float: right;
+}
+.mnt{
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    margin-bottom: 7px;
+    display: block;
+}
+
+.mobile-nav{
+    background-color: white;
+    padding: 20px;
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 200px;
+}
+.mobile-nav.active{
+    display: block;
+}
+.mobile-nav-close{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    float: right;
+}
+.mnc{
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    margin-bottom: 7px;
+    display: block;
+    position: relative;
+}
+.mnc-1{
+    transform: rotate(45deg);
+    top: 11px;
+}
+.mnc-2{
+    transform: rotate(-45deg);
+}
+.mobile-nav-inner{
+    margin-top: 20px;
+}
+.mobile-nav-inner a{
+    display: block;
+    color: black;
+    margin-bottom: 10px;    
+}
+.desktop-right-nav{
+    display: none;
+    text-align: right;
+}
+.band{
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    position: relative;
+}
+.intro-band{
+    padding-top: 70px;
+}
+.band-content{
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+}
+.next-arrow{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    width: 50px;
+    text-align: center;
+}

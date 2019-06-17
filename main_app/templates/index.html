@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Home</h1>
+    <div class="band intro-band" style="background-image: url('{% static "images/bg.jpg" %}');">
+        <div class="band-content">
+            <h1>Welcome to home</h1>
+        </div>
+        <a href="#search-band" class="next-arrow">NEXT</a>
+    </div>
+    <div class="band search-band" id="search-band" style="background-image: url('{% static "images/bg2.jpg" %}');">
+        <div class="band-content">
+            <h1>Search</h1>
+            ...
+        </div>
+    </div>
 
 {% endblock %}
