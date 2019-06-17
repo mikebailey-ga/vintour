@@ -32,5 +32,5 @@ class Winery(models.Model):
     phone = models.CharField(max_length=15, blank=True)
     cave = models.BooleanField(blank=True)
     tours = models.BooleanField(blank=True)
-    notes = models.CharField(max_length=200, blank=True)    
+    notes = models.CharField(max_length=200, blank=True)
     
