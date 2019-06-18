@@ -6,3 +6,9 @@
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key={{ map_key }}&q=Napa+CA" allowfullscreen>
 </iframe>
+
+<ul>
+{% for winery in wineries %}
+<li>Winery #: {{ winery.id }} Winery Name: {{ winery.name }}</li>
+{% endfor %}
+</ul>

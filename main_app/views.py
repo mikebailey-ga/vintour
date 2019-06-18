@@ -35,7 +35,8 @@ def about(request):
 
 def map(request):
     map_key = os.environ['MAP_KEY']
-    return render(request, 'mapembed.html', {'map_key': map_key})
+    wineries = Winery.objects.all()
+    return render(request, 'mapembed.html', {'map_key': map_key, 'wineries': wineries})
 
 def serp(request):
   key = os.environ['MAP_KEY']
