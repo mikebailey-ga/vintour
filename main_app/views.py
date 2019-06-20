@@ -140,11 +140,25 @@ def serp(request):
     regions = request.POST.getlist('region')
     request.session['regions'] = regions
 
+  if 'grape' in request.session:
+    grapes = request.session['grape']
+  else:
+    grapes = request.POST.getlist('grape')
+    request.session['grape'] = grape
+
+
   if request.user.is_authenticated:
     tours = Tour.objects.filter(user=request.user.id)    
   else:
     tours = None
-  query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
+
+  if len(regions) == 0:
+    regions = ['Napa', 'Sonoma']
+
+  if len(grapes) == 0:
+    query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
+  else:
+    query_result_raw = Winery.objects.filter(region__in=regions, grapes__in=grapes).order_by('name')[:20]
 
   page = request.GET.get('page', 1)
   paginator = Paginator(query_result_raw, 5)

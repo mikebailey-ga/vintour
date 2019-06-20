@@ -1,10 +1,20 @@
 <form method="post" action="/serp/">     
     {% csrf_token %} 
     <fieldset class="search-wrap">  
-        <legend>Select your region:</legend>      
+        <legend>Select by region(s):</legend>      
         <div class="check-wrap"><input type="checkbox" name="region" value="Napa">Napa</div>      
         <div class="check-wrap"></div><input type="checkbox" name="region" value="Sonoma">Sonoma</div>      
         <br>      
-        <input type="submit" value="Search for Winerys" />      
-    </fieldset>      
+    </fieldset>
+ 
+    <fieldset>
+        <legend>Select by common grape(s):</legend>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Cabernet">Cabernet</div>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Chardonnay">Chardonnay</div>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Merlot">Merlot</div>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Pinot Noir">Pinot Noir</div>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Sauvigon Blanc">Sauvigon Blanc</div>      
+        <div class="check-wrap"><input type="checkbox" name="grape" value="Zinfandel">Zinfandel</div>      
+    </fieldset>       
+    <input type="submit" value="Search for Wineries" />      
 </form>
