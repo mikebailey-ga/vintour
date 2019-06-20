@@ -156,20 +156,16 @@ def serp(request):
 ## If the user doesn't check anything, it defaults to all. Probably a better way to do this
   if len(regions) == 0:
     regions = ['Napa', 'Sonoma']
-    print('0000000000 regions')
-
 
   if len(grapes) == 0:
     query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
-    print('0000')
+  
   else:
     print(grapes[0])
-    query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
-    for q in query_result_raw:
-      print(q)
+    query_result_raw = Winery.objects.filter(Q(region__in=regions) & Q(grapes__icontains=grapes[0])).order_by('name')
 
   page = request.GET.get('page', 1)
-  paginator = Paginator(query_result_raw, 5)
+  paginator = Paginator(query_result_raw, 20)
   query_result = paginator.get_page(page)
   return render(request, 'serp.html', {'key': key, 'query_result': query_result, 'tours': tours})
 
