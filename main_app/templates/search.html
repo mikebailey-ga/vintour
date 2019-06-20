@@ -1,9 +1,9 @@
 <form method="post" action="/serp/">     
     {% csrf_token %} 
-    <fieldset>      
+    <fieldset class="search-wrap">  
         <legend>Select your region:</legend>      
-        <input type="checkbox" name="region" value="Napa">Napa<br>      
-        <input type="checkbox" name="region" value="Sonoma">Sonoma<br>      
+        <div class="check-wrap"><input type="checkbox" name="region" value="Napa">Napa</div>      
+        <div class="check-wrap"></div><input type="checkbox" name="region" value="Sonoma">Sonoma</div>      
         <br>      
         <input type="submit" value="Search for Winerys" />      
     </fieldset>      

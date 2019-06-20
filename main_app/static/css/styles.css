@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: #221710;
+  min-height: 100vh;
 }
 
 header {
@@ -198,6 +199,31 @@ header a {
   padding-top: 70px;
 }
 
+.search-wrap {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 7px;
+  padding: 20px;
+  color: white;
+  font-weight: 700;
+}
+.search-wrap .obutton {
+  background-color: #696969 !important;
+  border: 1px solid #696969 !important;
+  color: white !important;
+  display: inline-block;
+}
+.search-wrap .check-wrap {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.search-h1 {
+  font-weight: 700;
+}
+
 .profile-image {
   width: 70px;
   height: 70px;
@@ -312,6 +338,73 @@ header a {
   color: white;
 }
 
+.results {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+.results .result {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 3px;
+  background-color: white;
+  word-wrap: break-word;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.results .result .result-head {
+  padding: 10px 10px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-size: 18px;
+  color: #333;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+.results .result .result-body {
+  padding: 10px;
+  box-sizing: border-box;
+}
+.results .result .result-row {
+  display: block;
+  margin-bottom: 3px;
+  color: #333;
+  font-size: 13px;
+  line-height: 17px;
+}
+.results .result .result-select {
+  display: block;
+  width: 100%;
+  height: 38px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.obutton {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: #333;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 15px 30px;
+  border-radius: 3px;
+  margin-top: 10px;
+  opacity: 1;
+  transition: all 350ms;
+  font-size: 14px;
+  outline: none;
+}
+.obutton:hover {
+  opacity: 0.8;
+  outline: none;
+}
+.obutton:focus {
+  outline: none;
+}
+
 @media (min-width: 1024px) {
   .header-left {
     width: 33%;
@@ -352,6 +445,21 @@ header a {
   }
   .person:hover .context {
     display: block;
+  }
+
+  .results {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+  .results .result {
+    width: 31%;
+    float: left;
+    margin-bottom: 32px;
+    margin-right: 3%;
+  }
+  .results .result:nth-child(3n) {
+    margin-right: 0;
   }
 }
 

@@ -5,32 +5,30 @@
 <h1>SERP</h1>
 
 <div class="container">
-    <div class="columns">
+    <div class="results">
         {% for place in query_result %}
-        <div class="is-half">
-            <ul>
-                <li>Name: {{ place.name }}
-                <li>Address: {{ place.address }}
-                <li>Rating: {{ place.rating }}
-                <li>Open Now?: {{ place.open_now }}
-                <li>Region: {{ place.region }}
-                <li>Place ID: {{ place.place_id }}
-            </ul>
-
-            <div class='select'>
-            <form style='display:inline' method='POST' action="/tours/add/" id='addstop'>
-                <select name="tour" id="select">
-                    <option value='create'>Create new tour...</option>
-                    {% for tour in tours %}
-                        <option value='{{tour.id}}'>{{ tour.name }}</option>
-                    {% endfor %}
-                    <input type="hidden" name='winery' value='{{ place.id }}' >
-                    <input type="submit" class='btn' value='Add Stop'></input>
-                </select>
-                    {% csrf_token %}
-                </form>
+        <div class="result">
+            <div class="result-head">{{ place.name }}</div>
+            <div class="result-body">
+                <span class="result-row">Address: {{ place.address }}</span>
+                <span class="result-row">Rating: {{ place.rating }}</span>
+                <span class="result-row">Open Now?: {{ place.open_now }}</span>
+                <span class="result-row">Region: {{ place.region }}</span>
+                <span class="result-row">Place ID: {{ place.place_id }}</span>
+                <div class='result-select-wrap'>
+                    <form style='display:inline' method='POST' action="/tours/add/" id='addstop'>
+                        <select name="tour" id="select" class="result-select">
+                            <option value='create'>Create new tour...</option>
+                            {% for tour in tours %}
+                                <option value='{{tour.id}}'>{{ tour.name }}</option>
+                            {% endfor %}
+                            <input type="hidden" name='winery' value='{{ place.id }}' >
+                            <input type="submit" class='obutton result-select-button' value='Add Stop'></input>
+                        </select>
+                            {% csrf_token %}
+                    </form>
+                </div>
             </div>
-            </li>
         </div>
         {% endfor %}
         

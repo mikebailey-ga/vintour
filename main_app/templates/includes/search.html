@@ -1,0 +1,8 @@
+<form method="post" action="/serp/" class="search-wrap">     
+    {% csrf_token %} 
+        <legend>Select your region:</legend>      
+        <div class="check-wrap"><input type="checkbox" name="region" value="Napa">Napa</div>      
+        <div class="check-wrap"><input type="checkbox" name="region" value="Sonoma">Sonoma</div>      
+        <br>      
+        <input class='obutton' type="submit" value="Search for Winerys" />       
+</form>

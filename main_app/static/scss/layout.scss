@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: #221710;
+    min-height: 100vh;
 }
 header{
     padding: 20px;
@@ -174,4 +175,29 @@ header a{
 }
 .content{
     padding-top: 70px;
+}
+.search-wrap{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    // background: #f7f7f7;
+    border-radius: 7px;
+    padding: 20px;
+    color : white;
+    font-weight: 700;
+    .obutton{
+        background-color: #696969  !important;
+        border: 1px solid #696969 !important;
+        color: white  !important;
+        display: inline-block;
+    }
+    .check-wrap{
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+.search-h1{
+    font-weight: 700;
+    
 }

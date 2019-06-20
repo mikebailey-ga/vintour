@@ -31,10 +31,12 @@
             </svg>
         </a>
     </div>
-    <div class="band search-band" id="search"style="background-image: url('{% static "images/bg.jpg" %}');">
+    <div class="band search-band" id="search"style="background-image: url('{% static "images/searchbg.jpg" %}');">
         <div class="band-content">
-            <h1>Search</h1>
-            ...
+            <h1 class="search-h1">Search</h1>
+            <div class="searchembed">
+                    {% include "search.html" %}   
+                    </div>
         </div>
     </div>
 

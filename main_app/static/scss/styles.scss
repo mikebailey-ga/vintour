@@ -2,8 +2,10 @@
 @import "layout.scss";
 @import "profile.scss"; 
 @import "about.scss";
+@import "serp.scss";
 
 @media (min-width: 1024px){
     @import "1024/layout.scss"; 
     @import "1024/about.scss"; 
+    @import "1024/serp.scss"; 
 }
