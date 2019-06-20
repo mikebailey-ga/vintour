@@ -30,6 +30,7 @@ def signup(request):
 # Create your views here.
 
 def index(request):
+    request.session.flush()
     return render(request, 'index.html')
 
 def about(request):
@@ -134,6 +135,7 @@ def search(request):
 
 def serp(request):
   key = os.environ['MAP_KEY']
+## Keeps the search settings in sessions for pagination.
   if 'regions' in request.session:
     regions = request.session['regions']
   else:
@@ -144,21 +146,23 @@ def serp(request):
     grapes = request.session['grape']
   else:
     grapes = request.POST.getlist('grape')
-    request.session['grape'] = grape
-
+    request.session['grape'] = grapes
 
   if request.user.is_authenticated:
     tours = Tour.objects.filter(user=request.user.id)    
   else:
     tours = None
 
+## If the user doesn't check anything, it defaults to all. Probably a better way to do this
   if len(regions) == 0:
     regions = ['Napa', 'Sonoma']
+
 
   if len(grapes) == 0:
     query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
   else:
-    query_result_raw = Winery.objects.filter(region__in=regions, grapes__in=grapes).order_by('name')[:20]
+    print(grapes[0])
+    query_result_raw = Winery.objects.filter(region__in=regions, grapes__icontains=grapes[0]).order_by('name')[:20]
 
   page = request.GET.get('page', 1)
   paginator = Paginator(query_result_raw, 5)
