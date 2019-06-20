@@ -132,6 +132,7 @@ def unassoc_winery(request, tour_id, winery_id):
 def search(request):
   return render(request,'search.html')
 
+@login_required
 def serp(request):
   key = os.environ['MAP_KEY']
   if 'regions' in request.session:
