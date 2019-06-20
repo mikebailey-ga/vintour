@@ -139,18 +139,17 @@ def serp(request):
   else:
     regions = request.POST.getlist('region')
     request.session['regions'] = regions
-
   if request.user.is_authenticated:
     tours = Tour.objects.filter(user=request.user.id)    
   else:
     tours = None
   query_result_raw = Winery.objects.filter(region__in=regions).order_by('name')[:20]
-
   page = request.GET.get('page', 1)
   paginator = Paginator(query_result_raw, 5)
   query_result = paginator.get_page(page)
   return render(request, 'serp.html', {'key': key, 'query_result': query_result, 'tours': tours})
 
+  
 def dbupdate(request):
   key = os.environ['MAP_KEY']
   google_places = GooglePlaces(key)  
