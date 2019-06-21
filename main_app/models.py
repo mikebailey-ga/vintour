@@ -17,7 +17,11 @@ class Winery(models.Model):
     price = models.CharField(max_length=50, blank=True, default='')
     rating = models.CharField(max_length=10, blank=True, default='')
     region = models.CharField(max_length=50, blank=True, default='')
+<<<<<<< HEAD
     grapes = models.CharField(max_length=500, blank=True)
+=======
+    grapes = models.CharField(max_length=1000, blank=True)
+>>>>>>> d4df817328f8625525cd1028c9416e4a29316fb7
 
     def __str__(self):
         return self.name
