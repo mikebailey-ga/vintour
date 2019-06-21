@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -30,7 +31,7 @@ def signup(request):
 # Create your views here.
 
 def index(request):
-    request.session.flush()
+    # request.session.flush()
     return render(request, 'index.html')
 
 def about(request):
@@ -38,7 +39,7 @@ def about(request):
 
 @login_required
 def profile(request):
-    tours = Tour.objects.filter(user=request.user.id)     
+    tours = Tour.objects.filter(user=request.user.id)
     return render (request, 'profile.html', {'tours': tours})
 
 def recommendedtrips(request):
@@ -46,23 +47,28 @@ def recommendedtrips(request):
 
 @login_required
 def stop_reorder(request, tour_id):
+  # Get req data and tour in question
   data = request.POST.copy()
   tour = Tour.objects.get(id=tour_id)
+  # Get stop's position along tour and listify stops for reordering
   position = int(data['position'])
   stops = list(filter(None, tour.stops.split(',')))
   stops_copy = stops.copy()
+  # If up arrow is pressed, winery is swapped with the one preceding it
   try:
     if data['moveup'] and position >= 1:
       stops[position - 1] = stops[position]
       stops[position] = stops_copy[position - 1]
   except:
     pass
+  # If down arrow is pressed, winery is swapped with winery after it on route
   try:
     if data['movedn'] and position <= len(stops) - 2:
       stops[position + 1] = stops_copy[position]
       stops[position] = stops_copy[position + 1]
   except:
     pass
+  # Stop string reassembled for storage in db and saved
   tour.stops = f'{",".join(stops)},'
   tour.save()
   return redirect(f'/tours/{tour_id}/')
@@ -70,35 +76,36 @@ def stop_reorder(request, tour_id):
 
 @login_required
 def tour_detail(request, tour_id):
-    map_key = os.environ['MAP_KEY']
-    # Get tour
-    tour = Tour.objects.get(id=tour_id)
-    stops = tour.stops.split(',')
-    # Set tour start and finish and format for url
-    origin = stops[0].replace(' ', '+').replace('&', '+').replace('.', '')
-    destination = stops[len(stops) - 2].replace(' ', '+').replace('&', '+').replace('.', '')
-    # Assemble wineries in order for display on route
-    waypoint_dicts = []
-    for stop in stops:
-      if len(stop):
-        st = Winery.objects.get(name=stop)
-        waypoint_dicts.append(st)
-    # Assemble waypoints excluding first and last into list for url
-    waypoints = stops[1:-1]
-    # Format waypoints for url
-    for idx in range(len(waypoints) - 1):
-      waypoints[idx] = waypoints[idx] + '|'
-    waypoint_concat = ''.join(waypoints).replace(' ', '+').replace('&', '+').replace('.', '')
-    if len(stops) <= 2:
-      embed_url = f'https://www.google.com/maps/embed/v1/place?q={origin}&key={ map_key }'
-    else:
-      embed_url = (f'https://www.google.com/maps/embed/v1/directions?key={ map_key }&origin={ origin }&destination={ destination }&waypoints={ waypoint_concat }')
-    return render(request, 'tour_detail.html', {
-      'map_key': map_key,
-      'tour': tour,
-      'embed_url': embed_url,
-      'waypoint_dicts': waypoint_dicts,
-      })
+  map_key = os.environ['MAP_KEY']
+  # Get tour
+  tour = Tour.objects.get(id=tour_id)
+  stops = tour.stops.split(',')
+  # Set tour start and finish and format for url
+  origin = stops[0].replace(' ', '+').replace('&', '+').replace('.', '')
+  destination = stops[len(stops) - 2].replace(' ', '+').replace('&', '+').replace('.', '')
+  # Assemble wineries in order for display on route
+  waypoint_dicts = []
+  for stop in stops:
+    if len(stop):
+      st = Winery.objects.get(name=stop)
+      waypoint_dicts.append(st)
+  # Assemble waypoints excluding first and last into list for url
+  waypoints = stops[1:-1]
+  # Format waypoints for url
+  for idx in range(len(waypoints) - 1):
+    waypoints[idx] = waypoints[idx] + '|'
+  waypoint_concat = ''.join(waypoints).replace(' ', '+').replace('&', '+').replace('.', '')
+  # Displays map with single marker if only one stop added to tour
+  if len(stops) <= 2:
+    embed_url = f'https://www.google.com/maps/embed/v1/place?q={origin}&key={ map_key }'
+  else:
+    embed_url = (f'https://www.google.com/maps/embed/v1/directions?key={ map_key }&origin={ origin }&destination={ destination }&waypoints={ waypoint_concat }')
+  return render(request, 'tour_detail.html', {
+    'map_key': map_key,
+    'tour': tour,
+    'embed_url': embed_url,
+    'waypoint_dicts': waypoint_dicts,
+    })
 
 @login_required
 def add_winery(request):
@@ -122,6 +129,10 @@ def name_tour(request, tour_id):
   tour.save()
   return redirect('tour_detail', tour_id=tour_id)
 
+class TourDelete(LoginRequiredMixin, DeleteView):
+  model = Tour
+  success_url = '/profile/'
+
 @login_required
 def unassoc_winery(request, tour_id, winery_id):
   tour = Tour.objects.get(id=tour_id)
@@ -133,6 +144,7 @@ def unassoc_winery(request, tour_id, winery_id):
 def search(request):
   return render(request,'search.html')
 
+@login_required
 def serp(request):
   key = os.environ['MAP_KEY']
 ## Keeps the search settings in sessions for pagination.
