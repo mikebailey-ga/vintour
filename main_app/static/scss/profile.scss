@@ -1,5 +1,3 @@
-.profile-content{
-}
 .profile-image{
     width: 70px;
     height: 70px;
@@ -8,42 +6,7 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-.pb1-left{
-    width: 50%;
-    float: left;
-}
-.pb1-right{
-    width: 50%;
-    float: right;
-    text-align: right;
-    padding-top: 15px;
-}
-.plus-button{
-    width: 35px;
-    height: 35px;
-    background-color: white;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: inline-block;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-    color: black;
-    line-height: 28px;
-}
-.minus-button{
-    width: 35px;
-    height: 35px;
-    background-color: white;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: inline-block;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-    color: black;
-    line-height: 28px;
 
+.user-announce {
+    color: whitesmoke;
 }

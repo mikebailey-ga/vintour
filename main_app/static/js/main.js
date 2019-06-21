@@ -31,4 +31,6 @@ $(document).ready(function(){
           freeDrag: false,
           dots: true,
       });
+
+    
 });

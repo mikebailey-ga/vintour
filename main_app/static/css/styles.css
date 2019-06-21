@@ -405,6 +405,116 @@ header a {
   outline: none;
 }
 
+h2, h3 {
+  color: white;
+  font-weight: 700;
+}
+
+body {
+  height: 100%;
+  background-image: url('{% static "images/searchbg.jpg" %}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: silver;
+}
+
+.sort-button-container {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+
+.sort-button-container form {
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.sort-button-container form :first-of-type {
+  margin-left: 0;
+}
+
+.tourname {
+  border: 2px solid #ffc107;
+  border-radius: 4px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 15px 30px;
+  border-radius: 3px;
+  margin-top: 10px;
+  opacity: 1;
+  transition: all 350ms;
+  font-size: 14px;
+  outline: none;
+}
+.btn:hover {
+  opacity: 0.8;
+  outline: none;
+}
+.btn:focus {
+  outline: none;
+}
+
+.btncard {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: #333;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 15px 30px;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  opacity: 1;
+  transition: all 350ms;
+  font-size: 14px;
+  outline: none;
+}
+.btncard:hover {
+  opacity: 0.8;
+  outline: none;
+}
+.btncard:focus {
+  outline: none;
+}
+
+.winery-card {
+  display: inline;
+  /* border: 1px solid black; */
+  height: auto;
+  /* width: 50px; */
+  padding: 20px;
+  width: 33%;
+  background-color: white;
+  border-radius: 5px;
+  /* margin-bottom: 50px; */
+  margin: 20px;
+}
+
+strong {
+  color: #333;
+  padding: 5px;
+}
+
+iframe {
+  margin-top: 80px;
+  height: 60vh;
+}
+
 @media (min-width: 1024px) {
   .header-left {
     width: 33%;
@@ -453,13 +563,10 @@ header a {
     max-width: 100%;
   }
   .results .result {
-    width: 31%;
+    width: 30%;
     float: left;
     margin-bottom: 32px;
     margin-right: 3%;
-  }
-  .results .result:nth-child(3n) {
-    margin-right: 0;
   }
 }
 

@@ -17,6 +17,7 @@ class Winery(models.Model):
     price = models.CharField(max_length=50, blank=True, default='')
     rating = models.CharField(max_length=10, blank=True, default='')
     region = models.CharField(max_length=50, blank=True, default='')
+    grapes = models.CharField(max_length=1000, blank=True)
 
     def __str__(self):
         return self.name
@@ -30,3 +31,9 @@ class Tour(models.Model):
 
     def __str__(self):
         return self.name
+
+    def stop_list(self):
+        return (', ').join(list(filter(None, self.stops.split(','))))
+
+    def get_absolute_url(self):
+        return reverse('tour_detail', kwargs={'pk': self.id})

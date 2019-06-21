@@ -1,0 +1,60 @@
+.about-intro{
+    background-color: #221710;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .band-content{
+        top: initial;
+        bottom: 30px;
+    }
+}
+// h1.about-title{
+//     color: white;  
+// } 
+.about-title{
+    margin-bottom: 0;
+    text-align: center;
+    font-family: 'Lato';
+}
+.about-nav{
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    width: 300px;
+}
+.about-nav a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+    letter-spacing: 0.02em;
+}
+.center{
+    text-align: center;
+}
+
+.person{
+    width: 90vw;
+    height: 90vw;
+    margin: 20px auto;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .context{
+        padding: 40px;
+        background-color: white;
+        opacity: 0.7;
+        padding: 30px;
+        margin: 50px;
+        color: black;
+    }
+}
+.our-team{
+    color: white;
+}

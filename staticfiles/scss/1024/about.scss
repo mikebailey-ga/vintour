@@ -1,0 +1,19 @@
+.person{
+    width: 30vw;
+    height: 30vw;
+    margin: 20px auto;
+    float: left;
+    margin-right: 1%;
+    margin-left: 2%;
+    .context{
+        background-color: transparent;
+        display: none;
+        color: white;
+        opacity: 1;
+    }
+    &:hover{
+        .context{
+            display: block;
+        }
+    }
+}

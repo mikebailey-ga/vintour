@@ -2,39 +2,50 @@
 {% load static %}
 
 {% block content %}
-    <div class="band content profile-content" >
-        <div class="inner-wrap">
-            <h1>{{ user.username }}</h1>
-            <div class="profile-band1">
-                <div class="pb1-left">
-                    <div class="profile-image" style="background-image: url('{% static "images/tanya.jpg" %}');"></div>
-                </div>
-                <div class="pb1-right">
-                    <a href="" class="plus-button">+</a>
-                    <a href="" class="minus-button">-</a>
-                </div>
-            </div>
-            <div class="profile-band2">
-                <div class="trips-carousel owl-carousel owl-theme">
-                    <div class="trip-item item">
-                        <img src="{% static "images/bg.jpg" %}">
-                        <span class="trip-title">Laguna Beach</span>
+
+<style>
+h1.user-announce, h2.user-announce {
+    color: whitesmoke;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+</style>
+
+<div class="band content profile-content" >
+    <div class="inner-wrap">
+        <h1 class="user-announce">{{ user.username }}'s Account</h1>
+        <div class="profile-band2">
+            <div>
+                <h2 class="user-announce">{{ user.username }}'s Tours:</h2>
+                {% if tours %}
+                    {% for tour in tours %}
+                    <div class="card">
+                        <header class="card-header">
+                            <h2 class="card-header-title">
+                                {{ tour.name }}
+                            </h2>
+                            
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <strong>{{ tour.stop_list }}</strong><br>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="{% url 'tour_detail' tour.id %}" class="card-footer-item">View</a>
+                            <a href="{% url 'tour_delete' tour.id %}" class="card-footer-item">Delete</a>
+                        </footer>
                     </div>
-                    <div class="trip-item item">
-                        <img src="{% static "images/bg2.jpg" %}">
-                        <span class="trip-title">Laguna Beach2</span>
-                    </div>
-                    <div class="trip-item item">
-                        <img src="{% static "images/bg3.jpg" %}">
-                        <span class="trip-title">Laguna Beach3</span>
-                    </div>
-                    <div class="trip-item item">
-                        <img src="{% static "images/bg4.jpg" %}">
-                        <span class="trip-title">Laguna Beach4</span>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% else %}
+
+
+                {% endif %}   
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

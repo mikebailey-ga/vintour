@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+body {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.winery-card {
+  border: 1px solid black;
+  height: auto;
+  width: 60%;
+}
+</style>
+<iframe
+width="80%"
+height="40%"
+frameborder="0" style="border:0"
+src="{{ embed_url }}" allowfullscreen>
+</iframe>
+{{ waypoint_dicts }}
+<div id="winery-cards-sortable">
+{% for winery in waypoint_dicts %}
+<div class='winery-card'>
+  <strong>{{ winery.name }}</strong><br>
+  <strong>{{ winery.region }}</strong><br>
+  <strong>{{ winery.address }}</strong><br>
+  <strong>{{ winery.desc }}</strong><br>
+  <strong>{{ winery.price }}</strong><br>
+  <div class="sort-button-container">
+    <form action="reorder/" method="POST">
+      <input type="hidden" name='winery' value='{{ winery.name }}' >
+      <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
+      <input type="submit" class='btn' name="moveup" value="⇧"></input>
+      {% csrf_token %}
+    </form>
+    <form action="reorder/" method="POST">
+      <input type="hidden" name='winery' value='{{ winery.name }}' >
+      <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
+      <input type="submit" class='btn' name="movedn" value="⇩"></input>
+      {% csrf_token %}
+    </form>
+  </div>
+  
+</div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% comment %}
+background-image: url('{% static "images/bg4.jpg" %}');
+{% endcomment %}

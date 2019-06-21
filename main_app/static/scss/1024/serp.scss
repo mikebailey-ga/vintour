@@ -3,12 +3,9 @@
     width: 100%;
     max-width: 100%;
     .result{
-        width: 31%;
+        width: 30%;
         float: left;
         margin-bottom: 32px;
         margin-right: 3%;
-        &:nth-child(3n){
-            margin-right: 0;
-        }
     }
 }
