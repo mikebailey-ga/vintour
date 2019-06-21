@@ -6,6 +6,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('tours/<int:tour_id>/', views.tour_detail, name='tour_detail'),
+    path('tours/<int:pk>/delete/', views.TourDelete.as_view(), name='tour_delete'),
     path('tours/<int:tour_id>/name_tour/', views.name_tour, name='name_tour'),
     path('tours/<int:tour_id>/reorder/', views.stop_reorder, name='stop_reorder'),
     path('tours/<int:tour_id>/unassoc_winery/<int:winery_id>/', views.unassoc_winery, name='unassoc_winery'),

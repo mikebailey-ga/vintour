@@ -149,13 +149,15 @@ header {
                     <form action="reorder/" method="POST">
                       <input type="hidden" name='winery' value='{{ winery.name }}' >
                       <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="submit" class='btncard' name="moveup" value="⇧"></input>
+                      <input type="hidden" name="movedn">
+                      <button type="submit"class="btncard"><i class="fas fa-arrow-up"></i></button>
                       {% csrf_token %}
                     </form>
                     <form action="reorder/" method="POST">
                       <input type="hidden" name='winery' value='{{ winery.name }}' >
                       <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="submit" class='btncard' name="movedn" value="⇩"></input>
+                      <input type="hidden" name="movedn">
+                      <button type="submit"class="btncard"><i class="fas fa-arrow-down"></i></button>
                       {% csrf_token %}
                     </form>
                     <form action="unassoc_winery/{{ winery.pk }}/" method="POST">
