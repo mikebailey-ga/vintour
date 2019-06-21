@@ -51,16 +51,19 @@ def stop_reorder(request, tour_id):
   position = int(data['position'])
   stops = list(filter(None, tour.stops.split(',')))
   stops_copy = stops.copy()
+  print(stops)
   try:
     if data['moveup'] and position >= 1:
       stops[position - 1] = stops[position]
       stops[position] = stops_copy[position - 1]
+      print('MOVEUP')
   except:
     pass
   try:
     if data['movedn'] and position <= len(stops) - 2:
       stops[position + 1] = stops_copy[position]
       stops[position] = stops_copy[position + 1]
+      print('MOVEDOWN')
   except:
     pass
   tour.stops = f'{",".join(stops)},'
@@ -70,7 +73,6 @@ def stop_reorder(request, tour_id):
 
 @login_required
 def tour_detail(request, tour_id):
-  print(Winery.objects.filter(Q(region__icontains='Napa') & Q(grapes__icontains='Pinot Noir')).order_by('name')[:20])
   map_key = os.environ['MAP_KEY']
   # Get tour
   tour = Tour.objects.get(id=tour_id)

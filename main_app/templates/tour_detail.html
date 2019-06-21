@@ -147,22 +147,22 @@ header {
                   <strong>{{ winery.price }}</strong><br>
                   <div class="sort-button-container">
                     <form action="reorder/" method="POST">
+                      {% csrf_token %}
                       <input type="hidden" name='winery' value='{{ winery.name }}' >
                       <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="hidden" name="movedn">
+                      <input type="hidden" name="moveup" value="1">
                       <button type="submit"class="btncard"><i class="fas fa-arrow-up"></i></button>
-                      {% csrf_token %}
                     </form>
                     <form action="reorder/" method="POST">
+                      {% csrf_token %}
                       <input type="hidden" name='winery' value='{{ winery.name }}' >
                       <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="hidden" name="movedn">
+                      <input type="hidden" name="movedn" value="1">
                       <button type="submit"class="btncard"><i class="fas fa-arrow-down"></i></button>
-                      {% csrf_token %}
                     </form>
                     <form action="unassoc_winery/{{ winery.pk }}/" method="POST">
-                      <input type="submit" class='btncard' value="delete"></input>
                       {% csrf_token %}
+                      <input type="submit" class='btncard' value="delete"></input>
                     </form>
                   </div>
                   
