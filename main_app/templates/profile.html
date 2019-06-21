@@ -2,39 +2,50 @@
 {% load static %}
 
 {% block content %}
-    <div class="band content profile-content" >
-        <div class="inner-wrap">
-            <h1 class="is-white">{{ user.username }}'s Account</h1>
-            <div class="profile-band2">
-                <div>
-                    <h2 class="user-announce">{{ user.username }}'s Tours:</h2>
-                    {% if tours %}
-                        {% for tour in tours %}
-                        <div class="card">
-                            <header class="card-header">
-                                <h2 class="card-header-title">
-                                    {{ tour.name }}
-                                </h2>
-                                
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <span>{{ tour.stops }}</span><br>
-                                </div>
+
+<style>
+h1.user-announce, h2.user-announce {
+    color: whitesmoke;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+</style>
+
+<div class="band content profile-content" >
+    <div class="inner-wrap">
+        <h1 class="user-announce">{{ user.username }}'s Account</h1>
+        <div class="profile-band2">
+            <div>
+                <h2 class="user-announce">{{ user.username }}'s Tours:</h2>
+                {% if tours %}
+                    {% for tour in tours %}
+                    <div class="card">
+                        <header class="card-header">
+                            <h2 class="card-header-title">
+                                {{ tour.name }}
+                            </h2>
+                            
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <span>{{ tour.stop_list }}</span><br>
                             </div>
-                            <footer class="card-footer">
-                                <a href="{% url 'tour_detail' tour.id %}" class="card-footer-item">View</a>
-                                <a href="{% url 'tour_delete' tour.id %}" class="card-footer-item">Delete</a>
-                            </footer>
                         </div>
-                        {% endfor %}
-                    {% else %}
+                        <footer class="card-footer">
+                            <a href="{% url 'tour_detail' tour.id %}" class="card-footer-item">View</a>
+                            <a href="{% url 'tour_delete' tour.id %}" class="card-footer-item">Delete</a>
+                        </footer>
+                    </div>
+                    {% endfor %}
+                {% else %}
 
 
-                    {% endif %}   
-                </div>
+                {% endif %}   
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

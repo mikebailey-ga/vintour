@@ -32,5 +32,8 @@ class Tour(models.Model):
     def __str__(self):
         return self.name
 
+    def stop_list(self):
+        return (', ').join(list(filter(None, self.stops.split(','))))
+
     def get_absolute_url(self):
         return reverse('tour_detail', kwargs={'pk': self.id})

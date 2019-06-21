@@ -3,73 +3,76 @@
 {% load static %}
 <style>
 
-.winery-container {
-  margin: 0 auto;
+.winery-card {
+  width: 90%;
 }
+
+#winery-cards-sortable {
+  margin-top: 70px;
+  flex-direction: column;
+}
+
+
 header {
   position: relative !important;
 }
 </style>
 <div class="winery-container">
-    <div class="columns" style="margin: 0 auto;">
-      <div class="column">
-        <div style="width: 100%; position: absolute; bottom: 80px;">
-            <h2>{{ user }}'s Tour: {{ tour.name }}</h2>
-            <h3>Rename {{ tour.name }}:</h3>
-            <form action="{% url 'name_tour' tour.id %}" method="post">
-              <input type="text" name="name" class="tourname" value="{{ tour.name }}">
-              <input type="submit" class="btn" value="Save">
-              {% csrf_token %}
-            </form>
-        </div>
+  <div class="columns" style="margin: 0 auto;">
+    <div class="column">
+      <div id="map-container">
+        <iframe
+        width="800"
+        height="400"
+        frameborder="0" style="border:0"
+        src="{{ embed_url }}" allowfullscreen>
+        </iframe>
       </div>
-      <div class="column">
-          <div id="map-container">
-              <iframe
-              width="800"
-              height="400"
-              frameborder="0" style="border:0"
-              src="{{ embed_url }}" allowfullscreen>
-              </iframe>
-            </div>
+      <div>
+        <h2>{{ user }}'s Tour: {{ tour.name }}</h2>
+        <h3>Rename {{ tour.name }}:</h3>
+        <form action="{% url 'name_tour' tour.id %}" method="post">
+          <input type="text" name="name" class="tourname" value="{{ tour.name }}">
+          <input type="submit" class="btn" value="Save">
+          {% csrf_token %}
+        </form>
       </div>
     </div>
-    <div class="columns">
-        <div class="column">
-            <div>
-                <div id="winery-cards-sortable" style="display: flex;"> 
-                {% for winery in waypoint_dicts %}
-                <div class='winery-card'>
-                  <p><strong>{{ winery.name }}</strong></p><br>
-                  <strong>{{ winery.region }}</strong><br>
-                  <strong>{{ winery.address }}</strong><br>
-                  <strong>{{ winery.desc }}</strong><br>
-                  <strong>{{ winery.price }}</strong><br>
-                  <div class="sort-button-container">
-                    <form action="reorder/" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" name='winery' value='{{ winery.name }}' >
-                      <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="hidden" name="moveup" value="1">
-                      <button type="submit"class="btncard"><i class="fas fa-arrow-up"></i></button>
-                    </form>
-                    <form action="reorder/" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" name='winery' value='{{ winery.name }}' >
-                      <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
-                      <input type="hidden" name="movedn" value="1">
-                      <button type="submit"class="btncard"><i class="fas fa-arrow-down"></i></button>
-                    </form>
-                    <form action="unassoc_winery/{{ winery.pk }}/" method="POST">
-                      {% csrf_token %}
-                      <input type="submit" class='btncard' value="delete"></input>
-                    </form>
-                  </div>
-                  
-                </div>
-                {% endfor %}
-                </div>
+    <div class="column">
+      <div>
+        <div id="winery-cards-sortable" style="display: flex;"> 
+          {% for winery in waypoint_dicts %}
+          <div class='winery-card'>
+            <p><strong>{{ winery.name }}</strong></p><br>
+            <strong>{{ winery.region }}</strong><br>
+            <strong>{{ winery.address }}</strong><br>
+            <strong>{{ winery.desc }}</strong><br>
+            <strong>{{ winery.price }}</strong><br>
+            <div class="sort-button-container">
+              <form action="reorder/" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name='winery' value='{{ winery.name }}' >
+                <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
+                <input type="hidden" name="moveup" value="1">
+                <button type="submit"class="btncard"><i class="fas fa-arrow-up"></i></button>
+              </form>
+              <form action="reorder/" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name='winery' value='{{ winery.name }}' >
+                <input type="hidden" name='position' value='{{ forloop.counter0 }}' >
+                <input type="hidden" name="movedn" value="1">
+                <button type="submit"class="btncard"><i class="fas fa-arrow-down"></i></button>
+              </form>
+              <form action="unassoc_winery/{{ winery.pk }}/" method="POST">
+                {% csrf_token %}
+                <input type="submit" class='btncard' value="delete"></input>
+              </form>
+            </div>
+          </div>
+          {% endfor %}
         </div>
       </div>
+    </div>
+  </div>
 </div>
 {% endblock %} 

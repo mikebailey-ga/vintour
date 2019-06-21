@@ -31,7 +31,7 @@ def signup(request):
 # Create your views here.
 
 def index(request):
-    request.session.flush()
+    # request.session.flush()
     return render(request, 'index.html')
 
 def about(request):

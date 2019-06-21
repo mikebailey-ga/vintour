@@ -2,14 +2,22 @@
 
 {% load static %}
 {% block content %}
-  <h1>Delete Tour</h1>
+<style>
+h1.user-announce, h4.user-announce {
+    color: whitesmoke;
+}
+</style>
 
-  <h4>Are you sure you want to delete the tour {{ object.name }}?</h4>
+<div class="content">
+  <h1 class="user-announce">Delete Tour</h1>
+
+  <h4 class="user-announce">Are you sure you want to delete the tour {{ object.name }}?</h4>
 
   <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'tour_detail' object.id %}">Cancel - View Tour</a>
-    <a href="{% url 'profile' %}">Back to Profile</a>
+    <button class="btn"> <a href="{% url 'tour_detail' object.id %}">Cancel - View Tour</a></button>
+    <button class="btn"> <a href="{% url 'profile' %}">Back to Profile</a></button>
   </form>
+</div>
 {% endblock %}
