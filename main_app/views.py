@@ -46,26 +46,28 @@ def recommendedtrips(request):
 
 @login_required
 def stop_reorder(request, tour_id):
+  # Get req data and tour in question
   data = request.POST.copy()
   tour = Tour.objects.get(id=tour_id)
+  # Get stop's position along tour and listify stops for reordering
   position = int(data['position'])
   stops = list(filter(None, tour.stops.split(',')))
   stops_copy = stops.copy()
-  print(stops)
+  # If up arrow is pressed, winery is swapped with the one preceding it
   try:
     if data['moveup'] and position >= 1:
       stops[position - 1] = stops[position]
       stops[position] = stops_copy[position - 1]
-      print('MOVEUP')
   except:
     pass
+  # If down arrow is pressed, winery is swapped with winery after it on route
   try:
     if data['movedn'] and position <= len(stops) - 2:
       stops[position + 1] = stops_copy[position]
       stops[position] = stops_copy[position + 1]
-      print('MOVEDOWN')
   except:
     pass
+  # Stop string reassembled for storage in db and saved
   tour.stops = f'{",".join(stops)},'
   tour.save()
   return redirect(f'/tours/{tour_id}/')
@@ -92,6 +94,7 @@ def tour_detail(request, tour_id):
   for idx in range(len(waypoints) - 1):
     waypoints[idx] = waypoints[idx] + '|'
   waypoint_concat = ''.join(waypoints).replace(' ', '+').replace('&', '+').replace('.', '')
+  # Displays map with single marker if only one stop added to tour
   if len(stops) <= 2:
     embed_url = f'https://www.google.com/maps/embed/v1/place?q={origin}&key={ map_key }'
   else:
