@@ -135,6 +135,7 @@ class TourDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def unassoc_winery(request, tour_id, winery_id):
+  # deletes a winery from your tour
   tour = Tour.objects.get(id=tour_id)
   tour.winery.remove(winery_id)
   tour.stops = tour.stops.replace(f'{Winery.objects.get(id=winery_id).name},', '')
