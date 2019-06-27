@@ -11,6 +11,7 @@ class Profile(models.Model):
     bio = models.TextField()
 
 class Winery(models.Model): 
+    # model for defining a winery
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100, blank=True, default='')
     desc = models.CharField(max_length=1000, blank=True, default='')
